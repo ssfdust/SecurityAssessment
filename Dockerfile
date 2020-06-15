@@ -15,11 +15,11 @@ RUN /entrypoint.sh \
         -a zlib \
         -a libjpeg \
         -a freetype \
-        -a lapack \
+        -a lapack@community \
         -a postgresql-libs \
         -b zlib-dev \
         -b musl-dev \
-        -b lapack-dev \
+        -b lapack-dev@community \
         -b libxslt-dev \
         -b libffi-dev \
         -b jpeg-dev \
