@@ -15,9 +15,11 @@ RUN /entrypoint.sh \
         -a zlib \
         -a libjpeg \
         -a freetype \
+        -a openblas \
         -a lapack@community \
         -a postgresql-libs \
         -b zlib-dev \
+        -b openblas-dev \
         -b musl-dev \
         -b lapack-dev@community \
         -b libxslt-dev \
