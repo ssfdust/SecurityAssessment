@@ -15,6 +15,7 @@ RUN CFLAGS="-g0 -Wl,--strip-all -I/usr/include:/usr/local/include:/usr/local/lib
         /entrypoint.sh \
         -a zlib \
         -a wqy-zenhei@etesting \
+        -a libstdc++ \
         -a libjpeg \
         -a freetype \
         -a lapack@community \
