@@ -18,6 +18,7 @@ RUN /entrypoint.sh \
         -a freetype \
         -a lapack@community \
         -a postgresql-libs \
+        -a openblas@community \
         -b zlib-dev \
         -b openblas-dev@community \
         -b musl-dev \
