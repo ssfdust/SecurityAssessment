@@ -14,7 +14,7 @@ ENV FLASK_ENV="production" \
 
 WORKDIR /tmp
 
-RUN apt-get update && apt-get install -y wget bzip2 gcc fonts-wqy-microhei
+RUN apt-get update && apt-get install -y wget bzip2 gcc fonts-wqy-microhei libssl-dev libfontconfig1
 
 RUN wget -q -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${PHANTOMJS_VERSION}-${PHANTOMJS_PLATFORM}.tar.bz2 && \
   tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
@@ -40,8 +40,7 @@ RUN pip install $PIP_FLAGS --upgrade pip poetry pip-autoremove \
         && rm -rf ~/.cache \
         && wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /usr/bin/wait-for-it \
         && chmod 755 /usr/bin/wait-for-it \
-        && apt-get remove -y gcc wget bzip2 --purge \
-        && apt-get autoremove -y \
+        && apt-get purge --auto-remove -y gcc wget bzip2 curl \
         && apt-get clean \
         && python -c "from text2vec import Similarity;Similarity().load_model()" \
         && rm -rf /pycache
