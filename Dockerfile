@@ -1,26 +1,24 @@
 FROM python:3.8-slim
 
 ENV FLASK_ENV="production" \
-      FLASK_APP="/Application/smorest_sfs/app.py" \
-      HOST="0.0.0.0" \
-      PYTHONPYCACHEPREFIX="/pycache" \
-      LOGURU_LEVEL=INFO \
-      PUID=1000 \
-      PGID=1000 \
-      PIP_FLAGS='--no-cache-dir -q' \
-      PHANTOMJS_VERSION=2.1.1 \
-      PHANTOMJS_PLATFORM=linux-x86_64 \
-      APP="web"
+               FLASK_APP="/Application/smorest_sfs/app.py" \
+               HOST="0.0.0.0" \
+               PYTHONPYCACHEPREFIX="/pycache" \
+               LOGURU_LEVEL=INFO \
+               PUID=1000 \
+               PGID=1000 \
+               PIP_FLAGS='--no-cache-dir -q' \
+               PHANTOMJS_VERSION=2.1.1 \
+               PHANTOMJS_PLATFORM=linux-x86_64 \
+               OPENSSL_CONF=/etc/ssl/ \
+               APP="web"
 
-WORKDIR /tmp
-
-RUN apt-get update && apt-get install -y wget bzip2 gcc fonts-wqy-microhei libssl-dev libfontconfig1
-
-RUN wget -q -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${PHANTOMJS_VERSION}-${PHANTOMJS_PLATFORM}.tar.bz2 && \
-  tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
-  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /usr/local/share/phantomjs && \
-  ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+RUN apt-get update && apt-get install -y wget bzip2 gcc fonts-wqy-microhei \
+        && wget -q -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${PHANTOMJS_VERSION}-${PHANTOMJS_PLATFORM}.tar.bz2 \
+        && tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp \
+        && rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 \
+        && mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /usr/local/share/phantomjs \
+        && ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
 
 RUN mkdir Application
 
