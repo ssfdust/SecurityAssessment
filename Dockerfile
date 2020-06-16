@@ -11,7 +11,8 @@ ENV FLASK_ENV="production" \
 
 COPY pyproject.toml poetry.lock /
 
-RUN /entrypoint.sh \
+RUN CFLAGS="-g0 -Wl,--strip-all -I/usr/include:/usr/local/include:/usr/local/lib/pyenv/versions/3.8.2/include -L/usr/lib:/usr/local/lib:/usr/local/lib/pyenv/versions/3.8.2/lib" \
+        /entrypoint.sh \
         -a zlib \
         -a wqy-zenhei@etesting \
         -a libjpeg \
