@@ -43,8 +43,7 @@ RUN pip install $PIP_FLAGS --upgrade pip poetry pip-autoremove \
         && apt-get remove -y gcc wget bzip2 --purge \
         && apt-get autoremove -y \
         && apt-get clean \
+        && python -c "from text2vec import Similarity;Similarity().load_model()" \
         && rm -rf /pycache
-
-RUN python -c "from text2vec import Similarity;Similarity().load_model()"
 
 CMD ["/bin/sh", "scripts/initapp.sh"]
